@@ -20,7 +20,10 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
+
     'djoser',
+
+    'drf_spectacular',
 
     'api.apps.ApiConfig',
     'users.apps.UsersConfig'
@@ -107,6 +110,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
            'rest_framework.authentication.TokenAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 DJOSER = {
@@ -144,3 +148,18 @@ MAX_LENGTH_EMAIL = 254
 MAX_LENGTH_USERNAME = 150
 MIN_LENGTH_PASSWORD = 6
 MAX_LENGTH_PASSWORD = 30
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Longevity API",
+    'DESCRIPTION': 'API documentation for my project',
+    "VERSION": "0.0.1",
+    "SERVE_INCLUDE_SCHEMA": True,
+    "SWAGGER_UI_SETTINGS": {
+        "filter": True,
+        "deepLinking": False,
+        "persistAuthorization": False,
+        "displayOperationId": True,
+    },
+    "COMPONENT_SPLIT_REQUEST": True,
+}
