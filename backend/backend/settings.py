@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from datetime import timedelta
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-8@)lb**bgzkp3ya5ym0!0%91icfco61c-zore57%1!3p^+nhzu'
@@ -103,30 +105,42 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+           'rest_framework.authentication.TokenAuthentication',
     ),
 }
 
 DJOSER = {
-    'LOGIN_FIELD': 'email',
-    'HIDE_USERS': False,
-    'ACTIVATION_URL': 'activate/{uid}/{token}',
-    'PASSWORD_RESET_CONFIRM_URL': 'users/set_password/{uid}/{token}',
-    'SERIALIZERS': {
-        'user_create': 'api.users.users_serializers.UserCreateSerializer',
-        'user': 'api.users.users_serializers.CustomUserSerializer',
-        'user_delete': 'djoser.serializers.UserDeleteSerializer',
-        'current_user': 'api.users.users_serializers.CustomUserSerializer',
-        'set_password': 'djoser.serializers.SetPasswordSerializer',
-        'set_password_retype': (
-            'djoser.serializers.SetPasswordRetypeSerializer'),
-        'token': 'djoser.serializers.TokenSerializer',
-        'token_create': 'djoser.serializers.TokenCreateSerializer',
-    },
-    'PERMISSIONS': {
-        'user': ('rest_framework.permissions.IsAuthenticated',),
-        'user_list': ('rest_framework.permissions.AllowAny',)
-    }
-}
+       'LOGIN_FIELD': 'email',
+       'USER_CREATE_PASSWORD_RETYPE': True,
+       'HIDE_USERS': False,
+       'ACTIVATION_URL': 'activate/{uid}/{token}',
+       'PASSWORD_RESET_CONFIRM_URL': 'users/set_password/{uid}/{token}',
+       'SERIALIZERS': {
+           'user_create':
+               'api.users.users_serializers.UserCreateSerializer',
+           'user':
+               'api.users.users_serializers.CustomUserSerializer',
+           'user_delete':
+               'djoser.serializers.UserDeleteSerializer',
+           'current_user':
+               'api.users.users_serializers.CustomUserSerializer',
+           'set_password':
+               'djoser.serializers.SetPasswordSerializer',
+           'set_password_retype':
+               'djoser.serializers.SetPasswordRetypeSerializer',
+           'token': 'djoser.serializers.TokenSerializer',
+           'token_create': 'djoser.serializers.TokenCreateSerializer',
+       },
+       'PERMISSIONS': {
+           'user': ('rest_framework.permissions.IsAuthenticated',),
+           'user_list': ('rest_framework.permissions.AllowAny',),
+       },
+   }
 
 AUTH_USER_MODEL = 'users.User'
+
+
+MAX_LENGTH_EMAIL = 254
+MAX_LENGTH_USERNAME = 150
+MIN_LENGTH_PASSWORD = 6
+MAX_LENGTH_PASSWORD = 30

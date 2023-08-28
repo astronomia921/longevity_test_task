@@ -1,14 +1,11 @@
 from django.contrib.auth import models as auth_models
-from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.db import models
 
+from backend.settings import (MAX_LENGTH_EMAIL, MAX_LENGTH_PASSWORD,
+                              MAX_LENGTH_USERNAME, MIN_LENGTH_PASSWORD)
 
 from .validators import validate_password, validate_username
-
-MAX_LENGTH_EMAIL = 254
-MAX_LENGTH_USERNAME = 150
-MIN_LENGTH_PASSWORD = 6
-MAX_LENGTH_PASSWORD = 30
 
 
 class User(auth_models.AbstractUser):
@@ -17,7 +14,7 @@ class User(auth_models.AbstractUser):
         verbose_name='Username',
         validators=[validate_username],
         max_length=MAX_LENGTH_USERNAME,
-        help_text='Введите имя пользователя',
+        help_text='Enter the username',
         unique=True,
         db_index=True,
         blank=False
@@ -25,20 +22,20 @@ class User(auth_models.AbstractUser):
     email = models.EmailField(
         verbose_name='Email Address',
         max_length=MAX_LENGTH_EMAIL,
-        help_text='Введите адрес электронной почты',
+        help_text='Enter the email',
         blank=False,
         unique=True,
     )
     first_name = models.CharField(
         verbose_name='First Name',
         max_length=MAX_LENGTH_USERNAME,
-        help_text='Введите ваше имя',
+        help_text='Enter your first name',
         blank=False
     )
     last_name = models.CharField(
         verbose_name='Last Name',
         max_length=MAX_LENGTH_USERNAME,
-        help_text='Введите вашу фамилию',
+        help_text='Type your last name',
         blank=False,
     )
     password = models.TextField(
@@ -55,8 +52,12 @@ class User(auth_models.AbstractUser):
                 message='Password must be shorter than 30 characters'
             ),
             validate_password
-        ]
-    )
+        ],
+        help_text=(
+            'Enter password.'
+            'It must include lowercase and uppercase letters '
+            'of the Latin alphabet and numbers.'),
+        )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'username', 'password']
