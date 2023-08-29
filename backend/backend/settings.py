@@ -151,15 +151,20 @@ MAX_LENGTH_PASSWORD = 30
 
 
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Longevity API",
+    'TITLE': 'Longevity API',
     'DESCRIPTION': 'API documentation for my project',
-    "VERSION": "0.0.1",
-    "SERVE_INCLUDE_SCHEMA": True,
-    "SWAGGER_UI_SETTINGS": {
-        "filter": True,
-        "deepLinking": False,
-        "persistAuthorization": False,
-        "displayOperationId": True,
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': True,
+    'SWAGGER_UI_SETTINGS': {
+        'filter': True,
+        'deepLinking': False,
+        'persistAuthorization': False,
+        'displayOperationId': True,
+        'defaultModelsExpandDepth': -1,
+        'defaultModelExpandDepth': 3,
+        'docExpansion': 'none',
+        'tagsSorter': 'alpha',
+        'operationsSorter': 'alpha',
     },
-    "COMPONENT_SPLIT_REQUEST": True,
+    'COMPONENT_SPLIT_REQUEST': True,
 }

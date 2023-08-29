@@ -1,68 +1,26 @@
 from djoser.views import UserViewSet
 
-from drf_spectacular.utils import extend_schema_view, extend_schema
+from drf_spectacular.utils import extend_schema_view
 
-# from rest_framework import status
-
-# from .users_serializers import CustomUserCreateSerializer, CustomUserSerializer
+from api.schemas import (
+    list_schema,
+    create_schema,
+    retrieve_schema,
+    update_schema,
+    partial_update_schema,
+    destroy_schema,
+)
 
 from users.models import User
 
 
 @extend_schema_view(
-    list=extend_schema(
-        summary="Get list of users",
-        responses={
-            200: {"description": "Successful operation"},
-            401: {"description": "Unauthorized"},
-            403: {"description": "Forbidden"},
-        },
-    ),
-    create=extend_schema(
-        summary="Create a new user",
-        responses={
-            201: {"description": "User created successfully"},
-            400: {"description": "Bad request"},
-        },
-    ),
-    retrieve=extend_schema(
-        summary="Get user details",
-        responses={
-            200: {"description": "Successful operation"},
-            401: {"description": "Unauthorized"},
-            403: {"description": "Forbidden"},
-            404: {"description": "User not found"},
-        },
-    ),
-    update=extend_schema(
-        summary="Update user details",
-        responses={
-            200: {"description": "User updated successfully"},
-            400: {"description": "Bad request"},
-            401: {"description": "Unauthorized"},
-            403: {"description": "Forbidden"},
-            404: {"description": "User not found"},
-        },
-    ),
-    partial_update=extend_schema(
-        summary="Partially update user details",
-        responses={
-            200: {"description": "User updated successfully"},
-            400: {"description": "Bad request"},
-            401: {"description": "Unauthorized"},
-            403: {"description": "Forbidden"},
-            404: {"description": "User not found"},
-        },
-    ),
-    destroy=extend_schema(
-        summary="Delete user",
-        responses={
-            204: {"description": "User deleted successfully"},
-            401: {"description": "Unauthorized"},
-            403: {"description": "Forbidden"},
-            404: {"description": "User not found"},
-        },
-    ),
+    list=list_schema,
+    create=create_schema,
+    retrieve=retrieve_schema,
+    update=update_schema,
+    partial_update=partial_update_schema,
+    destroy=destroy_schema,
 )
 class AccountViewSet(UserViewSet):
     queryset = User.objects.all()
