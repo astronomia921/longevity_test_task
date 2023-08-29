@@ -165,6 +165,15 @@ SPECTACULAR_SETTINGS = {
         'docExpansion': 'none',
         'tagsSorter': 'alpha',
         'operationsSorter': 'alpha',
+        'exampleValueCode': True,
     },
     'COMPONENT_SPLIT_REQUEST': True,
+    'EXAMPLES_PROVIDE_MEDIA_TYPE': True,
+    'EXAMPLES_SETTINGS': {
+        'mediaTypes': {
+            'application/json': {
+                'example': '{"key": "value"}',
+            },
+        },
+    },
 }
